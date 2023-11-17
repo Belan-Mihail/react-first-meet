@@ -15,7 +15,7 @@ import React from "react"
 // render() required
 // props not passed as an argument (because this is already a class and not a function)
 // you need to use the keyword this for props
-class StatefullGreetingWithCallback extends React.Component {
+class StatefullGreetingPreState extends React.Component {
 
     // I'm going to add a constructor, which is a special method that is always 
     //  called when the class is first instantiated. Add props so that 
@@ -35,6 +35,7 @@ class StatefullGreetingWithCallback extends React.Component {
             // anything the component might change either on its  own or due to user interaction.
             introduction: 'Hello',
             buttonText: 'Exit',
+            count: 0, 
         }
     }
 
@@ -47,24 +48,12 @@ class StatefullGreetingWithCallback extends React.Component {
         // kann man nicht machen. Only need setUp method use
         // this.state.introduction = "Goodbay"
 
-        // need to use. setState is async function. setState is executing in the background  
-        // while the rest of the code continues  executing
-        this.setState({
-            // Now another nice thing about using setState  is that not only will setState make sure the  
-// component rerenders after the state is updated,  but it will also merge the new state with the old one,
-// so the other state property, buttonText, will  still be included in the updated state and won’t  
-// be modified unless you modify it in the setState  method
-            // при таком синтаксисе другое значение (buttonText: 'Exit') которое мы еще не меняли
-            // при помощи setState остается в старом значении.
-            introduction: 'Goodbay',
-            // set up new value to buttonText
-            buttonText: 'Enter', 
-
-        // () => {} - second parametr of setState. It is callback function
-        // Important!
-        // Anytime you need to run some code  
-// after the state update is complete, place the code  in a callback function as the second parameter to  
-// setState, NOT immediately after the setState  call.
+        // update correctly
+        this.setState((prevState, prevProps) => {
+            return {
+                introduction: prevState.introduction === "Hello" ? "Goodbay" : "Hello",
+                buttonText: prevState.buttonText === "Exit" ? "Enter" : "Exit",
+            }
         }, () => {
         console.log('new state', this.state.introduction)
         console.log('new state', this.state.buttonText)
@@ -76,7 +65,23 @@ class StatefullGreetingWithCallback extends React.Component {
 
     }
 
+//     When dealing with state updates that depend  on the previous state of the component,  
+// there is a third form of the  setState method you must always use.
+// This third form takes a function  as the first parameter to setState.  
+// The function can take two parameters,  previous state, and previous props,  
+// and returns the object that will be used to  create the new state. In the same component we  
+// used in the last video, let's update our increment  function with a new call to this.setState, and as  
+// the first parameter pass in an arrow function  that takes previous state and previous props. 
+    implementCount() {
+        this.setState((prevState, prevProps) => {
+            console.log('PrevState:', prevState)
+            console.log('PrevProps:', prevProps)
+            return {
+                count: prevState.count + 1
+            }
 
+        })
+    }
 
     render() {
         // lesson before
@@ -87,6 +92,7 @@ class StatefullGreetingWithCallback extends React.Component {
         return (
             <div>
                 <h1>{this.state.introduction} {this.props.name} {this.props.greeting}</h1>
+                
 
                 {/* add onClick function/ Must be in camelCase */}
                 {/* Since I want to use Javascript code, the value of  this will need to be in curly braces, and inside  
@@ -94,10 +100,12 @@ the curly braces, will be an arrow function  that calls a method called this.han
 The reason we’re using an arrow function rather  than just calling this.handleClick() directly  
 will be explained in more detail later  on so don't worry about that for now.   */}
                 <button onClick={() => this.handleClick()}>{this.state.buttonText}</button>
+                <button onClick={() => this.implementCount()}>Implement</button>
+                <h2>{this.state.count}</h2>
             </div>
         )
         
     }
 }
 
-export default StatefullGreetingWithCallback
+export default StatefullGreetingPreState

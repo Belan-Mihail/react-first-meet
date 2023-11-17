@@ -3,6 +3,7 @@ import FunctionalGreeting1 from "./components/FunctionalGreeting1";
 import FunctionalGreetingWithProps from "./components/FunctionalGreetingWithProps";
 import StatefullGreeting from "./components/StatefullGreeting";
 import StatefullGreetingWithCallback from "./components/StatefullGreetingWithCallback";
+import StatefullGreetingPreState from "./components/StatefullGreetingPreState";
 import HooksCounter from "./components/HooksCounter";
 
 function App() {
@@ -13,7 +14,7 @@ function App() {
       {/* <StatefulGreeting name="Anna" />
       <HooksCounter name="Mike" /> */}
 
-      <StatefullGreetingWithCallback greeting="from stateful class component!!!" name="Snizhana"/>
+      <StatefullGreetingPreState greeting="from stateful class component!!!" name="Snizhana"/>
 
       {/* <FunctionalGreeting1 />
       <FunctionalGreeting1 />
