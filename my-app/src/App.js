@@ -17,6 +17,9 @@ import Clock from "./components/Clock";
 import LifeCyclesCDM from "./components/LifeCyclesCDM";
 import LifeCyclesCDU from "./components/LifeCyclesCDU";
 import LifeCyclesCWU from "./components/LifeCyclesCWU";
+import ControllForm from "./components/ControllForm";
+import UnControllForm from "./components/UnControllForm";
+import SearchBar from "./components/SearchBar";
 
 function App() {
   return (
@@ -53,7 +56,10 @@ function App() {
       {/* <Clock /> */}
       {/* <LifeCyclesCDM /> */}
       {/* <LifeCyclesCDU /> */}
-      <LifeCyclesCWU />
+      {/* <LifeCyclesCWU /> */}
+      {/* <ControllForm /> */}
+      {/* <UnControllForm /> */}
+      <SearchBar />
     </div>
   );
 }
